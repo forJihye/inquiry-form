@@ -109,7 +109,7 @@ let isFormValid = true;
 const form = {
   setSelectOptions: () => { // 셀렉트박스 옵션 렌더링
     const params = new URL(document.location).searchParams;
-    const brand = params.get('brand');
+    const brand = !params.size ? 'am' : params.get('brand');
     
     Object.keys(OPTIONS_CONFIG).forEach(key => {
       const elem = document.getElementById(key);
