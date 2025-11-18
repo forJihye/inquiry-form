@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inquiry Form (KO) | Arte Museum</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <form action="" id="inquiryForm">
+            <div class="row">
+              <div class="col-12 col-md-6" data-field-id="location">
+                <div class="mb-3">
+                  <label for="location" class="form-label">지점 선택 <span class="required">*</span></label>
+                  <select class="form-select" name="location" id="location" aria-label="" required>
+                    <option value="" selected disabled hidden>문의하실 지점을 선택해 주세요.</option>
+                  </select>
+                  <div class="invalid-feedback">문의하실 지점을 선택해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="category">
+                <div class="mb-3">
+                  <label for="category" class="form-label">문의 유형 <span class="required">*</span></label>
+                  <select class="form-select" name="category" id="category" aria-label="" required>
+                    <option value="" selected disabled hidden>유형을 선택해 주세요.</option>
+                  </select>
+                  <div class="invalid-feedback">문의 유형을 선택해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="businessPurpose">
+                <div class="mb-3">
+                  <label for="businessPurpose" class="form-label">문의 목적 <span class="required">*</span></label>
+                  <select class="form-select" name="businessPurpose" id="businessPurpose" aria-label="" required>
+                    <option value="" selected disabled hidden>문의 목적을 선택해 주세요.</option>
+                  </select>
+                  <div class="invalid-feedback">문의 목적을 선택해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="country">
+                <div class="mb-3">
+                  <label for="country" class="form-label">국가 선택</label>
+                  <select class="form-select select-placeholder" name="country" id="country" aria-label="" autocomplete="off">
+                    <option value="" selected disabled hidden>국가를 선택해 주세요.</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="completionDate">
+                <div class="mb-3">
+                  <label for="completionDate" class="form-label">완료 예정일 <span class="required">*</span></label>
+                  <div class="calendar">
+                    <input type="text" class="form-control" name="completionDate"  id="completionDate" placeholder="완료 예정일을 선택해 주세요." required autocomplete="off">
+                    <div class="invalid-feedback">프로젝트의 완료 예정일을 선택해 주세요.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="buyoutPurpose">
+                <div class="mb-3">
+                  <label for="buyoutPurpose" class="form-label">대관 목적 <span class="required">*</span></label>
+                  <select class="form-select" name="buyoutPurpose" id="buyoutPurpose" aria-label="" required>
+                    <option value="" selected disabled hidden>문의 목적을 선택해 주세요.</option>
+                  </select>
+                  <div class="invalid-feedback">대관 목적을 선택해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="buyoutDate">
+                <div class="mb-3">
+                  <label for="buyoutDate" class="form-label">희망 대관일 <span class="required">*</span></label>
+                  <div class="calendar">
+                    <input type="text" class="form-control" name="buyoutDate"  id="buyoutDate" placeholder="희망하는 대관일을 선택해 주세요." required autocomplete="off">
+                  <div class="invalid-feedback">희망하는 대관일을 선택해 주세요.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="customContent">
+                <div class="mb-3">
+                  <span class="form-label">맞춤형 콘텐츠 여부</span>
+                  <div>
+                    <input type="radio" class="btn-check" name="buyoutType" id="customContent" autocomplete="off">
+                    <label class="btn btn-outline-dark me-2" for="customContent">맞춤형 콘텐츠 포함</label>
+                    <input type="radio" class="btn-check" name="buyoutType" id="buyoutOnly" autocomplete="off">
+                    <label class="btn btn-outline-dark" for="buyoutOnly">공간만 이용</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6" data-field-id="company">
+                <div class="mb-3">
+                  <label for="company" class="form-label">회사명 <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="company" id="company" placeholder="회사명을 입력해 주세요." required autocomplete="off">
+                  <div class="invalid-feedback">회사명을 입력해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="name">
+                <div class="mb-3">
+                  <label for="name" class="form-label">이름 <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="담당자명을 입력해 주세요." required autocomplete="off">
+                  <div class="invalid-feedback">담당자 성함을 입력해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="phone">
+                <div class="mb-3">
+                  <label for="phone" class="form-label">연락처 <span class="required">*</span></label>
+                  <input type="tel" class="form-control" name="phone" id="phone" required autocomplete="off">
+                  <div class="invalid-feedback">연락 가능한 번호를 입력해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="email">
+                <div class="mb-3">
+                  <label for="email" class="form-label">이메일 <span class="required">*</span></label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="답변받으실 이메일 주소를 입력해 주세요." required autocomplete="off">
+                  <div class="invalid-feedback">이메일 형식을 확인해 주세요.</div>
+                </div>
+              </div>
+              <div class="col-12" data-field-id="inquiryDetail">
+                <div class="mb-3">
+                  <label for="inquiryDetail" class="form-label">문의 내용 <span class="required">*</span></label>
+                  <textarea rows="5" class="form-control" name="inquiryDetail" id="inquiryDetail" placeholder="프로젝트 개요, 목적, 요청 사항 등 문의 내용을 구체적으로 작성해 주세요." required autocomplete="off"></textarea>
+                </div>
+              </div>
+              <div class="col-12" data-field-id="fileUpload">
+                <div class="mb-3">
+                  <label for="fileUpload" class="form-label">파일 첨부 (최대 50MB)</label>
+                  <input type="file" class="form-control" name="fileUpload" id="fileUpload">
+                  <div class="invalid-feedback">50MB 이하 파일만 등록 가능합니다.</div>
+                  <ul class="file-hint" data-field-id="fileHelp">
+                    <li class="help-text"></li>
+                    <li>※ 여러 개의 파일은 하나의 ZIP 형태로 압축하여 첨부해 주시기 바랍니다.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                  <label class="form-check-label" for="checkDefault">
+                    개인 정보 수집 및 이용 약관 내용을 확인하였으며, 이에 동의합니다. <a href="#" class="modal-open-btn">(내용 보기)</a>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="d-grid mt-4">
+                  <button type="submit" id="submitBtn" class="btn btn-dark">SUBMIT</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="privacyModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="">개인정보 수집 및 이용</h1>
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body__scroll">
+            <div class="privacy">
+              <p>(주)디스트릭트홀딩스에 문의하시는 분들을 대상으로 아래와 같이 개인정보를 수집·이용하고 있습니다. 수집한 개인정보는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 및 기타 관계 법령에 의거하여 보호됩니다.</p>
+              <ul>
+                <li>
+                  <span>1. 개인정보의 수집 및 이용 목적</span>
+                  <p>비즈니스/프로젝트, PRESS/미디어, 대관 문의에 따른 본인확인 및 고지사항의 전달, 문의사항에 대한 응대, 원활한 의사소통의 경로확보</p>
+                </li>
+                <li>
+                  <span>2. 수집하는 개인정보의 항목</span>
+                  <p>필수항목: 회사명, 이름, 연락처, 이메일 주소, 문의 내용</p>
+                </li>
+                <li>
+                  <span>3. 개인정보의 보유 및 이용기간</span>
+                  <p>문의 접수일로부터 1년 (단, 문의자께서 개인정보의 삭제를 요청하시는 경우 지체 없이 즉시 삭제)</p>
+                </li>
+                <li>
+                  <span>4. 동의를 거부할 권리 및 동의 거부에 따른 불이익</span>
+                  <p>문의자는 개인정보의 수집·이용 등과 관련한 위 사항에 대하여 원하지 않는 경우 동의를 거부할 수 있습니다.</p>
+                  <p>다만, 수집하는 개인정보의 항목에서 필수 정보에 대한 수집 및 이용에 대하여 동의하지 않는 경우는 문의 응대에 제한이 있을 수 있습니다.</p>
+                </li>
+              </ul>
+              <p>㈜디스트릭트홀딩스는 비즈니스/프로젝트, PRESS/미디어, 대관 문의 접수를 위해 개인정보 보호법에 따라 귀하의 개인정보를 수집·이용하고자 합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

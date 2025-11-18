@@ -1,0 +1,66 @@
+:root {
+  --bs-body-color: #333;
+  --bs-body-font-family: "Pretendard";
+  --bs-border-radius: 3px;
+  --bs-border-color: #ccc;
+
+  --iti-arrow-padding: 8px;
+  --iti-spacer-horizontal: 12px;
+  --iti-hover-color: #ddd;
+}  
+
+.btn {--bs-btn-padding-y: 0.65rem}
+form {max-width: 960px; width: 100%; margin: 0 auto;}
+textarea {resize: none;}
+
+/* form control */
+.form-label {display: block;}
+.form-label .required {color: var(--bs-form-invalid-color);}
+.form-control {padding: .5rem .75rem;}
+.form-control:focus {box-shadow: none; border-color: #6c757d;}
+.form-control::placeholder {color: #7c7c7c !important;}
+
+.form-select {padding: .5rem 2.25rem .5rem .75rem; color: var(--bs-body-color);}
+.form-select:focus {box-shadow: none; border-color: #6c757d;}
+.form-select:invalid {color: #7c7c7c;}
+.form-select.select-placeholder {color: #7c7c7c;}
+
+.form-check-label {font-size: 0.875rem;}
+
+.btn-check ~ .btn-outline-dark {--bs-btn-padding-y: 0.5rem; --bs-btn-border-color: #ccc;}
+.btn-check ~ .btn-outline-dark:hover {--bs-btn-border-color: #333;}
+
+.calendar {position: relative;}
+.calendar::after {content: ""; display: inline-block; position: absolute; right: .75rem; top: 0.75rem; width: 1rem; height: 1rem; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237c7c7c' class='bi bi-calendar' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z'/%3E%3C/svg%3E"); pointer-events: none;}
+.calendar .form-control.is-invalid {background-position: right 2.25em center;}
+
+/* intl-tel-input style(https://github.com/jackocnr/intl-tel-input) */
+.iti {width: 100%;}
+.iti__selected-country-primary {background-color: rgba(0,0,0,0.1);}
+.iti__search-input {padding: .5rem .75rem 0.5rem 1.8rem; font-size: 0.875rem; color: var(--bs-body-color); border: 1px solid var(--bs-border-color);}
+.iti__search-input:focus-visible {outline: none;}
+.iti__country {font-size: 13px;}
+
+/* form custom component */
+.file-hint {margin-top: 4px; font-size: 13px; color: #7C7C7C; padding-left: 0; }
+.file-hint li {list-style: none;}
+
+
+/* datedatepicker style (https://mymth.github.io/vanillajs-datepicker/#/) */
+.datepicker-controls .button {font-size: 0.875rem;}
+.datepicker .dow  {font-size: 0.875rem;}
+.datepicker-grid {font-size: 14px;}
+
+/* modal custom css */
+.modal-open-btn {text-decoration: underline; color: inherit;}
+.modal {background-color: rgba(0,0,0,0.75);}
+.modal-dialog {top: 50%; transform: translateY(-50%); margin-top: 0; margin-bottom: 0;}
+.modal-body {padding: 0; padding-bottom: 1rem;} 
+.modal-body__scroll {padding: var(--bs-modal-padding); max-height: 400px; overflow-y: auto;}
+.privacy {font-size: 0.875rem; line-height: 1.5;}
+.privacy ul {list-style: none; padding: 0;}
+.privacy ul li span {font-weight: bold;}
+
+@media (max-width: 768px) {
+  html {font-size: 14px;}
+}
