@@ -40,7 +40,7 @@ const OPTIONS_CONFIG = {
 }
 
 // 필수 입력항목 ID
-const FORM_REQUIRED_FIELD_ID = ['location', 'category','company', 'name', 'phone', 'email', 'inquiryDetail'];
+const FORM_REQUIRED_FIELD_ID = ['location', 'category','company', 'name', 'phone', 'email', 'inquiryDetail', 'privacyAgree'];
 
 // 문의유형별 하위 입력항목
 const FORM_VISIBILITY_CONFIG = { 
@@ -217,12 +217,12 @@ const form = {
     });
   },
   validateField: (fieldId) => { // 입력 필드 유효성 개별 검사
-    const input = document.getElementById(fieldId);
-    if (!input) return;
+    const elem = document.getElementById(fieldId);
+    if (!elem) return;
     // console.log(fieldId, input, input.value);
 
     let isValid = true;
-    const value = input.value.trim();
+    const value = elem.value.trim();
 
     if (!value) isValid = false;
 
@@ -234,18 +234,29 @@ const form = {
     if (fieldId === 'phone') {
       document.querySelector('.iti').classList.toggle('is-invalid', !isValid);
     }
-    input.classList.toggle('is-invalid', !isValid);
+    if (fieldId === 'privacyAgree') {
+      isValid = elem.checked; 
+    }
+    
+    elem.classList.toggle('is-invalid', !isValid);
     
     return isValid;
   },
   validateForm: (type) => { // 폼 필수 입력 필드 유효성 검사
     const requiredFields = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
     
+    const temp = [];
     // 필수 입력 필드 검사
     requiredFields.forEach(fieldId => {
-      const valid = form.validateField(fieldId);
-      if (!valid) isFormValid = false;
+      const isValid = form.validateField(fieldId);
+      temp.push(isValid);
     });
+    
+    if (temp.filter(v => !v).length === 0) {
+      isFormValid = true;
+    } else {
+      isFormValid = false;
+    }
 
     return isFormValid;
   },
@@ -255,7 +266,7 @@ const form = {
     fieldIds.forEach((fieldId) => {
       const field = document.getElementById(fieldId);
       
-      if (field.type === 'select-one') {
+      if (field.type === 'select-one' || field.type === 'checkbox') {
         field.addEventListener('change', () => form.validateField(fieldId))
       }      
       
@@ -305,12 +316,13 @@ const main  = async () => { try {
   // 제출 버튼 클릭 이벤트
   submitBtn.addEventListener('click', (ev) => {
     ev.preventDefault();
-    form.validateForm(categorySelect.value || '');
 
+    form.validateForm(categorySelect.value || '');
+    // console.log(isFormValid);
     if (isFormValid) {
-      window.alert('폼 유효성 검사 완료');
+      console.log('폼 유효성 검사 완료');
     } else {
-      window.alert('폼 유효성 검사 실패');
+      console.log('폼 유효성 검사 실패');
     }
   });
 } catch(err){
