@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inquiry Form (EN) | Arte Museum</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <form action="" id="inquiryForm">
+            <div class="row">
+              <div class="col-12 col-md-6" data-field-id="location">
+                <div class="mb-3">
+                  <label for="location" class="form-label">Location <span class="required">*</span></label>
+                  <select class="form-select" name="location" id="location" aria-label="" required>
+                    <option value="" selected disabled hidden>Select a location.</option>
+                  </select>
+                  <div class="invalid-feedback">Select a location.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="category">
+                <div class="mb-3">
+                  <label for="category" class="form-label">Inquiry Type <span class="required">*</span></label>
+                  <select class="form-select" name="category" id="category" aria-label="" required>
+                    <option value="" selected disabled hidden>Select an inquiry type.</option>
+                  </select>
+                  <div class="invalid-feedback">Select an inquiry type.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="businessPurpose">
+                <div class="mb-3">
+                  <label for="businessPurpose" class="form-label">Inquiry Purpose <span class="required">*</span></label>
+                  <select class="form-select" name="businessPurpose" id="businessPurpose" aria-label="" required>
+                    <option value="" selected disabled hidden>Select an inquiry purpose.</option>
+                  </select>
+                  <div class="invalid-feedback">Select an inquiry purpose.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="country">
+                <div class="mb-3">
+                  <label for="country" class="form-label">Country</label>
+                  <select class="form-select select-placeholder" name="country" id="country" aria-label="" autocomplete="off">
+                    <option value="" selected disabled hidden>Select a country.</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="completionDate">
+                <div class="mb-3">
+                  <label for="completionDate" class="form-label">Target Completion Date <span class="required">*</span></label>
+                  <div class="calendar">
+                    <input type="text" class="form-control" name="completionDate"  id="completionDate" placeholder="Select a target completion date." required autocomplete="off">
+                    <div class="invalid-feedback">Select a target completion date.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="buyoutPurpose">
+                <div class="mb-3">
+                  <label for="buyoutPurpose" class="form-label">Buyout Purpose <span class="required">*</span></label>
+                  <select class="form-select" name="buyoutPurpose" id="buyoutPurpose" aria-label="" required>
+                    <option value="" selected disabled hidden>Select an buyout purpose.</option>
+                  </select>
+                  <div class="invalid-feedback">Select an buyout purpose.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="buyoutDate">
+                <div class="mb-3">
+                  <label for="buyoutDate" class="form-label">Preferred Buyout Date <span class="required">*</span></label>
+                  <div class="calendar">
+                    <input type="text" class="form-control" name="buyoutDate"  id="buyoutDate" placeholder="Select a preferred buyout date." required autocomplete="off">
+                  <div class="invalid-feedback">Select a preferred buyout date.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 field-conditional" data-field-id="customContent">
+                <div class="mb-3">
+                  <span class="form-label">Buyout type</span>
+                  <div>
+                    <input type="radio" class="btn-check" name="buyoutType" id="customContent" autocomplete="off">
+                    <label class="btn btn-outline-dark me-2" for="customContent">With Custom Content</label>
+                    <input type="radio" class="btn-check" name="buyoutType" id="buyoutOnly" autocomplete="off">
+                    <label class="btn btn-outline-dark" for="buyoutOnly">Buyout only</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6" data-field-id="company">
+                <div class="mb-3">
+                  <label for="company" class="form-label">Company <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="company" id="company" placeholder="Enter your company name." required autocomplete="off">
+                  <div class="invalid-feedback">Enter your company name.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="name">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name." required autocomplete="off">
+                  <div class="invalid-feedback">Enter your name.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="phone">
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Contact Number <span class="required">*</span></label>
+                  <input type="tel" class="form-control" name="phone" id="phone" required autocomplete="off">
+                  <div class="invalid-feedback">Enter your phone number.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="email">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email <span class="required">*</span></label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email address." required autocomplete="off">
+                  <div class="invalid-feedback">Enter your email address.</div>
+                </div>
+              </div>
+              <div class="col-12" data-field-id="inquiryDetail">
+                <div class="mb-3">
+                  <label for="inquiryDetail" class="form-label">Inquiry Details <span class="required">*</span></label>
+                  <textarea rows="4" class="form-control" name="inquiryDetail" id="inquiryDetail" placeholder="Please describe your inquiry in detail, including a brief project overview, timeline, and specific requests." required autocomplete="off"></textarea>
+                </div>
+              </div>
+              <div class="col-12" data-field-id="fileUpload">
+                <div class="mb-3">
+                  <label for="fileUpload" class="form-label">File Upload (Max 50MB)</label>
+                  <input type="file" class="form-control" name="fileUpload" id="fileUpload">
+                  <div class="invalid-feedback">Files up to 50MB can be uploaded.</div>
+                  <ul class="file-hint" data-field-id="fileHelp">
+                    <li class="help-text"></li>
+                    <li>※ For multiple files, please upload them as a single ZIP file.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12" data-field-id="privacyAgree">
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="privacyAgree">
+                  <label class="form-check-label" for="privacyAgree">
+                    I agree to the collection and use of my personal information
+                    <a href="#" class="modal-open-btn">(View Details)</a>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="d-grid mt-4">
+                  <button type="submit" id="submitBtn" class="btn btn-dark">SUBMIT</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="privacyModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="">Privacy Policy</h1>
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body__scroll">
+            <div class="privacy">
+              <p>d'stirct holdings INC. (hereinafter “d'strict”) collects and uses the personal information collected from the website. d'strict complies with the 「Act on the Promotion of Information and Communication Network Utilization and Information Protection」, personal information protection regulations, and guidelines of the Republic of Korea.</p>
+              <ul>
+                <li>
+                  <span>1. Collection of personal information and purpose of use:</span>
+                  <p>Upon the enquiries of Business/Project, Press/Media, and Venue Buyout you request, verifying your identity, delivering notices, responding to the enquiries, and securing communication channels</p>
+                </li>
+                <li>
+                  <span>2. Personal information items to be collected</span>
+                  <p>(Required) name of company or organization, name, email address and mobile phone number, Inquiry details.</p>
+                </li>
+                <li>
+                  <span>3. Period of retention and use of the personal information</span>
+                  <p>Period: one year (Upon request by customer, d’strict destroys personal information without delay)</p>
+                </li>
+                <li>
+                  <span>4. Right to refuse and disadvantage of refusal</span>
+                  <p>Customer may refuse to consent to the above matter for use and collection of personal information if he/she does not want to.
+                  <br/>However, consultation may be restricted if you do not consent to the collection and use of essential information in the list of personal information.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker.min.js"></script>
+  <script type="module"  src="./assets/js/main.js"></script>
+</body>
+</html>

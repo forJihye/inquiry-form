@@ -24,6 +24,7 @@ textarea {resize: none;}
 .form-select:focus {box-shadow: none; border-color: #6c757d;}
 .form-select:invalid {color: #7c7c7c;}
 .form-select.select-placeholder {color: #7c7c7c;}
+.form-select option {text-transform: capitalize;}
 
 .form-check-label {font-size: 0.875rem;}
 

@@ -1,88 +1,5 @@
-// 셀렉트박스 옵션 설정
-const OPTIONS_CONFIG = {
-  location: [
-    {label: "본사", value: "head",},
-    {label: "제주", value: "jeju",},
-    {label: "강릉", value: "gangneung",},
-    {label: "여수", value: "yeosu",},
-    {label: "부산", value: "busan",},
-    {label: "라스베가스", value: "lasvegas",},
-    {label: "두바이", value: "dubai",},
-    {label: "뉴욕", value: "newyork",},
-  ],
-  category: [
-    {label: "비즈니스/프로젝트", value: "business",},
-    {label: "PRESS/미디어", value: "press",},
-    {label: "대관", value: "buyout",},
-  ],
-  businessPurpose: [
-    {label: "라이선스", value: "license", visibility: ['AM']},
-    {label: "라이선스/구축", value: "build", visibility: ['AK']},
-    {label: "파트너십", value: "partnership", visibility: ['AM', 'AK']},
-    {label: "전시/콘텐츠 협업", value: "collaboration", visibility: ['AM', 'AK']},
-    {label: "기타", value: "other", visibility: ['AM', 'AK']},
-    // {label: "투자/JV", value: "investment", visibility: []},
-  ],
-  buyoutPurpose: [
-    {label: "브랜드 런칭/쇼케이스", value: "launch",},
-    {label: "프라이빗 이벤트", value: "private",},
-    {label: "비즈니스 네크워킹", value: "networking",},
-    {label: "기업 행사", value: "corporate",},
-    {label: "기타", value: "other",},
-  ],
-  country: [
-    {label: "대한민국", value: "kr",},
-    {label: "미국", value: "us",},
-    {label: "일본", value: "jp",},
-    {label: "중국", value: "cn",},
-    {label: "기타", value: "other",},
-  ]
-}
+import { OPTIONS_CONFIG, FORM_REQUIRED_FIELD_ID, FORM_VISIBILITY_CONFIG, FIELD_TEXT_CONFIG } from './config.js';
 
-// 필수 입력항목 ID
-const FORM_REQUIRED_FIELD_ID = ['location', 'category','company', 'name', 'phone', 'email', 'inquiryDetail', 'privacyAgree'];
-
-// 문의유형별 하위 입력항목
-const FORM_VISIBILITY_CONFIG = { 
-  business: {
-    show: ['businessPurpose', 'country', 'completionDate'],
-    required: ['businessPurpose', 'completionDate'],
-  },
-  buyout: {
-    show: ['buyoutPurpose', 'buyoutDate', 'customContent'],
-    required: ['buyoutPurpose', 'buyoutDate'],
-  },
-  press: {
-    show: [],
-    required: [],
-  },
-}
-
-// 문의유형별 필드 help 텍스트 설정
-const FIELD_TEXT_CONFIG = { 
-  inquiryDetail: {
-    business: {
-      placeholder: '프로젝트 개요, 목적, 요청 사항 등 문의 내용을 구체적으로 작성해 주세요.'
-    },
-    buyout: {
-      placeholder: '행사 목적, 일정, 예상 인원 등 대관 관련 내용을 구체적으로 작성해 주세요.'
-    },
-    press: {
-      placeholder: '보도나 촬영 목적, 매체 정보, 일정 등 문의 내용을 자세히 작성해 주세요.'
-    },
-  },
-  fileHelp: {
-    business: {
-      helpText: '※ 프로젝트 개요, 목적, 요청 사항 등 문의 내용을 구체적으로 작성해 주세요.'
-    },
-    buyout: {
-      helpText: '※ 행사 목적, 일정, 예상 인원 등 대관 관련 내용을 구체적으로 작성해 주세요.'
-    },
-    press: {
-      helpText: '※ 보도나 촬영 목적, 매체 정보, 일정 등 문의 내용을 자세히 작성해 주세요.'
-    },
-  }
-}
 
 const utils = {
   setIntlTel: () => { // 국가 코드 연동
@@ -146,13 +63,11 @@ const modal = {
 
 let isFormValid = true;
 const form = {
-  setSelectOptions: () => { // 셀렉트박스 옵션 렌더링 
-    const params = new URL(document.location).searchParams;
-    const brand = !params.size ? 'am' : params.get('brand');
-    
+  setSelectOptions: (urlParams) => { // 셀렉트박스 옵션 렌더링 
+    const {lang, brand} = urlParams;
     Object.keys(OPTIONS_CONFIG).forEach(key => {
       const elem = document.getElementById(key);
-      const options = OPTIONS_CONFIG[key];
+      const options = OPTIONS_CONFIG[key][lang];
       options.forEach(option => {
         const el = document.createElement('option');
         el.innerText = option.label;
@@ -174,7 +89,16 @@ const form = {
       }
     });
   },
-  applyInquiryType: (type) => { // 문의 유형에 따른 하위항목 렌더링
+  renderInquiryType: (type, urlParams) => { // 문의 유형에 따른 하위항목 렌더링
+    const {lang, location} = urlParams;
+
+    if (location) { // location 즉 지점이 명확할때 '지점선택' 항목 숨김 처리
+      const locationRow = document.querySelector(`[data-field-id="location"]`);
+      const input = locationRow.querySelector('select');
+      input.required = false;
+      locationRow.style.display = 'none';
+    }
+
     // 하위 입력 항목 숨김 처리 + required 속성 제거
     document.querySelectorAll('.field-conditional').forEach(row => {
       row.style.display = 'none';
@@ -208,11 +132,11 @@ const form = {
 
       const input = row.querySelector('textarea, input');
       if (input && typeConfig.placeholder) {
-        input.placeholder = typeConfig.placeholder;
+        input.placeholder = typeConfig.placeholder[lang];
       }
       const help = row.querySelector('.help-text');
       if (help && typeConfig.helpText) {
-        help.textContent = typeConfig.helpText;
+        help.textContent = typeConfig.helpText[lang];
       }
     });
   },
@@ -293,7 +217,17 @@ const form = {
   }
 }
 
+// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=amlv
+// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=amdb
+// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=akjj
+
 const main  = async () => { try {
+  const params = new URL(document.location).searchParams;
+  const brand = params.get('brand') ?? 'am';
+  const lang = params.get('lang') ?? 'en';
+  const location = params.get('location');
+  const urlParams = {brand, lang, location};
+
   utils.setIntlTel();
   utils.setDatepicker();
   modal.apply();
@@ -301,24 +235,22 @@ const main  = async () => { try {
   const categorySelect = document.getElementById('category');
   const submitBtn = document.getElementById('submitBtn');
 
-  form.setSelectOptions(); 
+  form.setSelectOptions(urlParams); 
   form.selectPlaceholder();
-  form.applyInquiryType(categorySelect.value || '');
+  form.renderInquiryType(categorySelect.value || '', urlParams);
   form.attachValidation(categorySelect.value || '');
   form.validateFileSize();
 
   // 문의유형 항목 이벤트
   categorySelect.addEventListener('change', (ev) => {
-    form.applyInquiryType(ev.target.value);
+    form.renderInquiryType(ev.target.value, urlParams);
     form.attachValidation(ev.target.value);
   });
 
   // 제출 버튼 클릭 이벤트
   submitBtn.addEventListener('click', (ev) => {
     ev.preventDefault();
-
     form.validateForm(categorySelect.value || '');
-    // console.log(isFormValid);
     if (isFormValid) {
       console.log('폼 유효성 검사 완료');
     } else {
