@@ -2,10 +2,10 @@ import { OPTIONS_CONFIG, FORM_REQUIRED_FIELD_ID, FORM_VISIBILITY_CONFIG, FIELD_T
 
 
 const utils = {
-  setIntlTel: () => { // 국가 코드 연동
+  setIntlTel: (lang) => { // 국가 코드 연동
     const input = document.querySelector("#phone");
     window.intlTelInput(input, {
-      initialCountry: "kr",
+      initialCountry: lang === 'ko' ? "kr" : "us",
       strictMode: true,
       separateDialCode: false,
       useFullscreenPopup: false,
@@ -228,7 +228,7 @@ const main  = async () => { try {
   const location = params.get('location');
   const urlParams = {brand, lang, location};
 
-  utils.setIntlTel();
+  utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
   
