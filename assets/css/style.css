@@ -53,7 +53,7 @@ textarea {resize: none;}
 
 /* modal custom css */
 .modal-open-btn {text-decoration: underline; color: inherit;}
-.modal-dialog {margin-top: 2rem; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
+.modal-dialog {margin-top: 10rem; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
 .modal-content {background-color: #f8f8f8;}
 .modal-body {padding: 0; padding-bottom: 1rem;} 
 .modal-body__scroll {padding: var(--bs-modal-padding); max-height: 400px; overflow-y: auto;}
