@@ -53,13 +53,22 @@ textarea {resize: none;}
 
 /* modal custom css */
 .modal-open-btn {text-decoration: underline; color: inherit;}
-.modal {background-color: rgba(0,0,0,0.75);}
+.modal-dialog {margin-top: 2rem; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
 .modal-dialog {top: 50%; transform: translateY(-50%); margin-top: 0; margin-bottom: 0;}
+.modal-content {background-color: #f8f8f8;}
 .modal-body {padding: 0; padding-bottom: 1rem;} 
 .modal-body__scroll {padding: var(--bs-modal-padding); max-height: 400px; overflow-y: auto;}
-.privacy {font-size: 0.875rem; line-height: 1.5;}
+/* .modal {background-color: rgba(0,0,0,0.75);} */
+
+/* privacy content style */
+.privacy {font-size: 0.875rem; line-height: 1.65;}
 .privacy ul {list-style: none; padding: 0;}
 .privacy ul li span {font-weight: bold;}
+
+/* privacy toggle */
+.privacy-toggle {cursor: pointer; text-decoration: underline; color: var(--bs-body-color);}
+.privacy-content {width: 100%; max-height: 220px; margin-top: 0.5rem; border: 1px solid  var(--bs-border-color); overflow-y: auto; padding-bottom: 0rem; background-color: #f8f8f8; border-radius: var(--bs-border-radius);}
+.privacy-body {width: 100%; height: 100%; padding: 1.25rem;}
 
 @media (max-width: 768px) {
   html {font-size: 14px;}

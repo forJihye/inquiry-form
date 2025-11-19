@@ -101,12 +101,49 @@ const utils = {
     }
     new Datepicker(document.querySelector('input[name="completionDate"]'), datepickerOptions);
     new Datepicker(document.querySelector('input[name="buyoutDate"]'), datepickerOptions);
+  },
+  privacyToggle: () => { // Privacy 약관 내용 토글 UI
+    const toggleBtn = document.querySelector('.privacy-toggle');
+    const box = document.getElementById('privacy');
+
+    if (!toggleBtn || !box) return;
+    box.style.display = 'none';
+
+    toggleBtn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+
+      // 상태 반전
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      box.style.display = !isExpanded ? 'block' : 'none';
+
+      if (!isExpanded) {
+        toggleBtn.textContent = '(내용 보기 ▲)';
+      } else {
+        toggleBtn.textContent = '(내용 보기 ▼)';
+      }
+    });
+  }
+}
+
+const modal = {
+  open: (elemId) => {
+    const modalElem = document.getElementById(elemId);
+    modalElem.style.display = 'block';
+  },
+  close: (elemId) => {
+    const modalElem = document.getElementById(elemId);
+    modalElem.style.display = 'none';
+  },
+  apply: () => {
+    const openBtn = document.querySelector('.modal-open-btn');
+    const closeBtn = document.querySelector('.modal .btn-close');
+    openBtn.addEventListener('click', () => modal.open('privacyModal'));
+    closeBtn.addEventListener('click', () => modal.close('privacyModal'));
   }
 }
 
 let isFormValid = true;
-
-
 const form = {
   setSelectOptions: () => { // 셀렉트박스 옵션 렌더링 
     const params = new URL(document.location).searchParams;
@@ -126,7 +163,7 @@ const form = {
       })
     })
   },
-  selectPlaceholder: () => { // 셀렉스박스 필수가 아닌 경우 placeholder 스타일 처리
+  selectPlaceholder: () => { // 셀렉트박스 필수가 아닌 경우 placeholder 스타일 처리
     const elem = document.querySelector('.form-select.select-placeholder');
     elem.addEventListener('change', () => {
       if (elem.value === '') {
@@ -178,7 +215,7 @@ const form = {
       }
     });
   },
-  validateField: (fieldId) => {
+  validateField: (fieldId) => { // 입력 필드 유효성 개별 검사
     const input = document.getElementById(fieldId);
     if (!input) return;
     // console.log(fieldId, input, input.value);
@@ -200,7 +237,7 @@ const form = {
     
     return isValid;
   },
-  validateForm: (type) => { // 필수 입력 필드 유효성 검사
+  validateForm: (type) => { // 폼 필수 입력 필드 유효성 검사
     const requiredFields = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
     
     // 필수 입력 필드 검사
@@ -211,7 +248,7 @@ const form = {
 
     return isFormValid;
   },
-  attachValidation: (type) => {
+  attachValidation: (type) => { // 입력 필드 이벤트 유효성 검사
     const fieldIds = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
 
     fieldIds.forEach((fieldId) => {
@@ -241,23 +278,6 @@ const form = {
 
       ev.target.classList.toggle('is-invalid', !isFormValid);
     })
-  }
-}
-
-const modal = {
-  open: (elemId) => {
-    const modalElem = document.getElementById(elemId);
-    modalElem.style.display = 'block';
-  },
-  close: (elemId) => {
-    const modalElem = document.getElementById(elemId);
-    modalElem.style.display = 'none';
-  },
-  apply: () => {
-    const openBtn = document.querySelector('.modal-open-btn');
-    const closeBtn = document.querySelector('.modal .btn-close');
-    openBtn.addEventListener('click', () => modal.open('privacyModal'));
-    closeBtn.addEventListener('click', () => modal.close('privacyModal'));
   }
 }
 
