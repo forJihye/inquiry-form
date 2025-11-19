@@ -308,9 +308,9 @@ const main  = async () => { try {
     form.validateForm(categorySelect.value || '');
 
     if (isFormValid) {
-      console.log('폼 유효성 검사 완료');
+      window.alert('폼 유효성 검사 완료');
     } else {
-      console.log('폼 유효성 검사 실패');
+      window.alert('폼 유효성 검사 실패');
     }
   });
 } catch(err){
