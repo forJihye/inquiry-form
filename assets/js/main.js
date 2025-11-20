@@ -1,4 +1,10 @@
-import { OPTIONS_CONFIG, FORM_REQUIRED_FIELD_ID, FORM_VISIBILITY_CONFIG, FIELD_TEXT_CONFIG } from './config.js';
+import { 
+  OPTIONS_CONFIG, 
+  FORM_REQUIRED_FIELD_ID, 
+  FORM_VISIBILITY_CONFIG, 
+  FIELD_TEXT_CONFIG,
+  SUBMIT_STATE
+ } from './config.js';
 
 
 const utils = {
@@ -41,6 +47,9 @@ const utils = {
         toggleBtn.textContent = '(내용 보기 ▼)';
       }
     });
+  },
+  sleep: (ms) => {
+    return new Promise(res => setTimeout(res, ms));
   }
 }
 
@@ -214,6 +223,30 @@ const form = {
 
       ev.target.classList.toggle('is-invalid', !isFormValid);
     })
+  },
+  setSubmitState: (state, elem, urlParams) => { // 폼 전송 시 제출 버튼 및 결과 상태
+    const {btn, result} = elem;
+    const {lang} = urlParams;
+    
+    if (state === 'loading') {
+      const html = `<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span class="px-2" role="status">Submitting...</span>`;
+      btn.innerHTML = html;
+      btn.disabled = true;
+    } else {
+      const message = SUBMIT_STATE[state][lang];
+      const stateText = result.querySelector('p');
+
+      btn.innerHTML = 'SUBMIT';
+      btn.disabled = false;
+      stateText.innerText = message;
+
+      if (state === 'success') {
+        stateText.classList.add('text-success');
+      }
+      if (state === 'error') {
+        stateText.classList.add('text-danger');
+      }
+    }
   }
 }
 
@@ -224,16 +257,18 @@ const form = {
 const main  = async () => { try {
   const params = new URL(document.location).searchParams;
   const brand = params.get('brand') ?? 'am';
-  const lang = params.get('lang') ?? 'en';
+  const lang = params.get('lang') ?? navigator.languages[0];
   const location = params.get('location');
   const urlParams = {brand, lang, location};
-
+  
   utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
   
   const categorySelect = document.getElementById('category');
   const submitBtn = document.getElementById('submitBtn');
+  const submitState = document.getElementById('submitState')
+  const stateProps = {btn: submitBtn, result: submitState}
 
   form.setSelectOptions(urlParams); 
   form.selectPlaceholder();
@@ -248,15 +283,20 @@ const main  = async () => { try {
   });
 
   // 제출 버튼 클릭 이벤트
-  submitBtn.addEventListener('click', (ev) => {
+  submitBtn.addEventListener('click', async (ev) => {try {
     ev.preventDefault();
     form.validateForm(categorySelect.value || '');
-    if (isFormValid) {
+
+    if (isFormValid) { // 폼 데이터 전송 로직 추가
       console.log('폼 유효성 검사 완료');
-    } else {
-      console.log('폼 유효성 검사 실패');
+      form.setSubmitState('loading', stateProps, urlParams);
+      await utils.sleep(5000);
+      form.setSubmitState('success', stateProps, urlParams);
     }
-  });
+  } catch(err){
+    form.setSubmitState('error', stateProps, urlParams);
+  }});
+  
 } catch(err){
   console.error(err);
 }}

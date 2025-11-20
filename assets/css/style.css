@@ -8,10 +8,13 @@
   --iti-spacer-horizontal: 12px;
   --iti-hover-color: #ddd;
 }  
+@media (max-width: 768px) {
+  html {font-size: 14px;}
+}
 
-.btn {--bs-btn-padding-y: 0.65rem}
-form {max-width: 960px; width: 100%; margin: 0 auto;}
+form {width: 100%; margin: 0 auto;}
 textarea {resize: none;}
+.btn {--bs-btn-padding-y: 0.65rem}
 
 /* form control */
 .form-label {display: block; font-weight: 700;}
@@ -19,6 +22,7 @@ textarea {resize: none;}
 .form-control {padding: .5rem .75rem;}
 .form-control:focus {box-shadow: none; border-color: #6c757d;}
 .form-control::placeholder {color: #7c7c7c !important;}
+.form-control[type="file"] {font-size: 0.875rem;}
 
 .form-select {padding: .5rem 2.25rem .5rem .75rem; color: var(--bs-body-color);}
 .form-select:focus {box-shadow: none; border-color: #6c757d;}
@@ -72,6 +76,3 @@ textarea {resize: none;}
 .privacy-content {width: 100%; max-height: 220px; margin-top: 0.5rem; border: 1px solid  var(--bs-border-color); overflow-y: auto; padding-bottom: 0rem; background-color: #f8f8f8; border-radius: var(--bs-border-radius);}
 .privacy-body {width: 100%; height: 100%; padding: 1.25rem;}
 
-@media (max-width: 768px) {
-  html {font-size: 14px;}
-}

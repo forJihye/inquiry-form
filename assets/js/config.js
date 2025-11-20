@@ -40,9 +40,9 @@ export const OPTIONS_CONFIG = {
     ],
     en: [
       {label: "head office", value: "head",},
-      {label: "lasvegas", value: "lasvegas",},
+      {label: "las vegas", value: "lasvegas",},
       {label: "dubai", value: "dubai",},
-      {label: "newyork", value: "newyork",},
+      {label: "new york", value: "newyork",},
       {label: "jeju", value: "jeju",},
       {label: "gangneung", value: "gangneung",},
       {label: "yeosu", value: "yeosu",},
@@ -102,10 +102,10 @@ export const OPTIONS_CONFIG = {
       {label: "기타", value: "other",},
     ],
     en: [
-      {label: "South Korea", value: "kr",},
       {label: "United States", value: "us",},
-      {label: "Japan", value: "jp",},
       {label: "China", value: "cn",},
+      {label: "Japan", value: "jp",},
+      {label: "South Korea", value: "kr",},
       {label: "Other", value: "other",},
     ]
   }
@@ -152,5 +152,16 @@ export const FIELD_TEXT_CONFIG = {
         en: '※ You may attach your proposal or any relevant reference materials.'
       }
     },
+  }
+}
+
+export const SUBMIT_STATE = {
+  success : {
+    ko: '문의하신 내용이 정상적으로 접수 되었습니다. 담당자를 통해 빠른 시일 내에 회신드리겠습니다.',
+    en: "Your message has been sent. We'll get back to you shortly.",
+  },
+  error: {
+    ko: '요청을 처리하는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.',
+    en: 'Something went wrong. Please try again later.'
   }
 }
