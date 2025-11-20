@@ -242,6 +242,7 @@ const form = {
 
       if (state === 'success') {
         stateText.classList.add('text-success');
+        setTimeout(() => stateText.innerText = '', 8000);
       }
       if (state === 'error') {
         stateText.classList.add('text-danger');
