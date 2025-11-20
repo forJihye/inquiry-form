@@ -167,6 +167,7 @@ const form = {
         isValid = false;
         emailValidationActive = true;
       }
+      console.log(emailValid)
     }
     if (fieldId === 'phone') {
       document.querySelector('.iti').classList.toggle('is-invalid', !isValid);
@@ -216,10 +217,12 @@ const form = {
       if (field.classList.contains('datepicker-input')) {
         field.addEventListener('changeDate', () => form.validateField(fieldId));  
       }
-      
+
       field.addEventListener('input', () => {
-        if (!emailValidationActive) return;
-        form.validateField(fieldId);
+        if (field.type === 'email') {
+          if (!emailValidationActive) return;
+        }
+        form.validateField(fieldId)
       });
     })
   },
