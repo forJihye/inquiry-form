@@ -269,8 +269,9 @@ const form = {
 
 const main  = async () => { try {
   const params = new URL(document.location).searchParams;
+  const defaultLang = navigator.languages[0] ?? 'en';
   const brand = params.get('brand') ?? 'am';
-  const lang = params.get('lang') ?? navigator.languages[0];
+  const lang = params.get('lang') ?? defaultLang;
   const location = params.get('location');
   const urlParams = {brand, lang, location};
   
