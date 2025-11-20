@@ -26,7 +26,7 @@ const utils = {
     new Datepicker(document.querySelector('input[name="completionDate"]'), datepickerOptions);
     new Datepicker(document.querySelector('input[name="buyoutDate"]'), datepickerOptions);
   },
-  privacyToggle: () => { // Privacy 약관 내용 토글 UI
+  privacyToggle: () => { // (사용 X) Privacy 약관 내용 토글 UI
     const toggleBtn = document.querySelector('.privacy-toggle');
     const box = document.getElementById('privacy');
 
