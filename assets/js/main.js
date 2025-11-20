@@ -71,6 +71,8 @@ const modal = {
 }
 
 let isFormValid = true;
+let emailValidationActive = false;
+
 const form = {
   setSelectOptions: (urlParams) => { // 셀렉트박스 옵션 렌더링 
     const {lang, brand} = urlParams;
@@ -101,7 +103,7 @@ const form = {
   renderInquiryType: (type, urlParams) => { // 문의 유형에 따른 하위항목 렌더링
     const {lang, location} = urlParams;
 
-    if (location) { // location 즉 지점이 명확할때 '지점선택' 항목 숨김 처리
+    if (location) { // location 지점이 명확할때 '지점선택' 항목 숨김 처리
       const locationRow = document.querySelector(`[data-field-id="location"]`);
       const input = locationRow.querySelector('select');
       input.required = false;
@@ -159,10 +161,12 @@ const form = {
 
     if (!value) isValid = false;
 
-    // 이메일 형식 체크
-    if (fieldId === 'email' && value) {
+    if (fieldId === 'email' && value) { // 이메일 형식 체크
       const emailValid = /\S+@\S+\.\S+/.test(value);
-      if (!emailValid) isValid = false;
+      if (!emailValid) {
+        isValid = false;
+        emailValidationActive = true;
+      }
     }
     if (fieldId === 'phone') {
       document.querySelector('.iti').classList.toggle('is-invalid', !isValid);
@@ -170,14 +174,17 @@ const form = {
     if (fieldId === 'privacyAgree') {
       isValid = elem.checked; 
     }
-    
+      
     elem.classList.toggle('is-invalid', !isValid);
-    
+  
     return isValid;
   },
-  validateForm: (type) => { // 폼 필수 입력 필드 유효성 검사
-    const requiredFields = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
-    
+  validateForm: (type, urlParams) => { // 폼 필수 입력 필드 유효성 검사
+    let requiredFields = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
+    if (urlParams.location) { // 지점선택이 불필요한 경우 location 필수입력 삭제
+      requiredFields = requiredFields.filter(v => v !== 'location');
+    }
+
     const temp = [];
     // 필수 입력 필드 검사
     requiredFields.forEach(fieldId => {
@@ -193,8 +200,11 @@ const form = {
 
     return isFormValid;
   },
-  attachValidation: (type) => { // 입력 필드 이벤트 유효성 검사
-    const fieldIds = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
+  attachValidation: (type, urlParams) => { // 입력 필드 이벤트 유효성 검사
+    let fieldIds = !type.length ? FORM_REQUIRED_FIELD_ID : [...FORM_REQUIRED_FIELD_ID, ...FORM_VISIBILITY_CONFIG[type].required];
+    if (urlParams.location) { // 지점선택이 불필요한 경우 location 필수입력 삭제
+      fieldIds = fieldIds.filter(v => v !== 'location');
+    }
 
     fieldIds.forEach((fieldId) => {
       const field = document.getElementById(fieldId);
@@ -206,8 +216,11 @@ const form = {
       if (field.classList.contains('datepicker-input')) {
         field.addEventListener('changeDate', () => form.validateField(fieldId));  
       }
-
-      field.addEventListener('input', () => form.validateField(fieldId));
+      
+      field.addEventListener('input', () => {
+        if (!emailValidationActive) return;
+        form.validateField(fieldId);
+      });
     })
   },
   validateFileSize: () => { // 첨부파일 크기 확인
@@ -251,10 +264,6 @@ const form = {
   }
 }
 
-// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=amlv
-// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=amdb
-// http://127.0.0.1:5500/index_en.html?lang=en&brand=am&location=akjj
-
 const main  = async () => { try {
   const params = new URL(document.location).searchParams;
   const brand = params.get('brand') ?? 'am';
@@ -274,27 +283,30 @@ const main  = async () => { try {
   form.setSelectOptions(urlParams); 
   form.selectPlaceholder();
   form.renderInquiryType(categorySelect.value || '', urlParams);
-  form.attachValidation(categorySelect.value || '');
+  form.attachValidation(categorySelect.value || '', urlParams);
   form.validateFileSize();
 
   // 문의유형 항목 이벤트
   categorySelect.addEventListener('change', (ev) => {
     form.renderInquiryType(ev.target.value, urlParams);
-    form.attachValidation(ev.target.value);
+    form.attachValidation(ev.target.value, urlParams);
   });
 
   // 제출 버튼 클릭 이벤트
   submitBtn.addEventListener('click', async (ev) => {try {
     ev.preventDefault();
-    form.validateForm(categorySelect.value || '');
+    form.validateForm(categorySelect.value || '', urlParams);
 
-    if (isFormValid) { // 폼 데이터 전송 로직 추가
-      console.log('폼 유효성 검사 완료');
+    if (isFormValid) { 
       form.setSubmitState('loading', stateProps, urlParams);
-      await utils.sleep(5000);
+      
+      // 폼 데이터 전송 로직 추가
+      await utils.sleep(5000); // 테스트용 (개발 후 삭제)
+      
       form.setSubmitState('success', stateProps, urlParams);
     }
   } catch(err){
+    console.error(err);
     form.setSubmitState('error', stateProps, urlParams);
   }});
   

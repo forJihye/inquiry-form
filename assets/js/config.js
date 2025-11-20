@@ -1,7 +1,8 @@
 // 필수 입력항목 ID
 export const FORM_REQUIRED_FIELD_ID = [
   'location',
-  'category','company',
+  'category',
+  'company',
   'name',
   'phone',
   'email',
