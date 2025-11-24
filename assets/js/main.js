@@ -249,13 +249,14 @@ const form = {
       btn.innerHTML = html;
       btn.disabled = true;
     } else {
-      const message = SUBMIT_STATE[state][lang];
-      const stateText = result.querySelector('p');
-
+      
       btn.innerHTML = 'SUBMIT';
       btn.disabled = false;
-      stateText.innerText = message;
-
+      
+      const message = SUBMIT_STATE[state][lang];
+      const stateText = result.querySelector('p');
+      // stateText.innerText = message;
+      window.alert(message);
       if (state === 'success') {
         stateText.classList.add('text-success');
         setTimeout(() => stateText.innerText = '', 8000);
