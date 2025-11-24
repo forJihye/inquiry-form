@@ -322,6 +322,7 @@ const main  = async () => { try {
       
       form.setSubmitState('success', stateProps, urlParams);
     }
+    utils.sendHeightToParent();
   } catch(err){
     console.error(err);
     form.setSubmitState('error', stateProps, urlParams);
