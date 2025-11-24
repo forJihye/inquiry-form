@@ -28,7 +28,7 @@ const utils = {
   },
   sendHeightToParent: () => {
     const wrapper = document.getElementById('inquiry-form') || document.body;
-    const height = wrapper.scrollHeight + 50
+    const height = wrapper.scrollHeight;
     
     window.parent.postMessage({
       type: 'INQUIRY_IFRAME_RESIZE',
@@ -277,6 +277,8 @@ const form = {
   }
 }
 
+window.addEventListener('load', () => utils.sendHeightToParent());
+
 const main  = async () => { try {
   const params = new URL(document.location).searchParams;
   const defaultLang = navigator.languages[0] ?? 'en';
@@ -284,8 +286,7 @@ const main  = async () => { try {
   const lang = params.get('lang') ?? defaultLang;
   const location = params.get('location');
   const urlParams = {brand, lang, location};
-  
-  window.addEventListener('load', () => utils.sendHeightToParent());
+
   utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
@@ -328,7 +329,4 @@ const main  = async () => { try {
 } catch(err){
   console.error(err);
 }}
-
-document.addEventListener('DOMContentLoaded', function () {
-  main();
-});
+main();
