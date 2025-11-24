@@ -26,6 +26,15 @@ const utils = {
     new Datepicker(document.querySelector('input[name="completionDate"]'), datepickerOptions);
     new Datepicker(document.querySelector('input[name="buyoutDate"]'), datepickerOptions);
   },
+  sendHeightToParent: () => {
+    const wrapper = document.getElementById('inquiry-form') || document.body;
+    const height = wrapper.scrollHeight + 50
+
+    window.parent.postMessage({
+      type: 'INQUIRY_IFRAME_RESIZE',
+      height: height,
+    })
+  },
   privacyToggle: () => { // (사용 X) Privacy 약관 내용 토글 UI
     const toggleBtn = document.querySelector('.privacy-toggle');
     const box = document.getElementById('privacy');
@@ -276,6 +285,7 @@ const main  = async () => { try {
   const location = params.get('location');
   const urlParams = {brand, lang, location};
   
+  utils.sendHeightToParent();
   utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
@@ -295,6 +305,7 @@ const main  = async () => { try {
   categorySelect.addEventListener('change', (ev) => {
     form.renderInquiryType(ev.target.value, urlParams);
     form.attachValidation(ev.target.value, urlParams);
+    setTimeout(utils.sendHeightToParent, 100);
   });
 
   // 제출 버튼 클릭 이벤트
