@@ -33,7 +33,7 @@ const utils = {
     window.parent.postMessage({
       type: 'INQUIRY_IFRAME_RESIZE',
       height: height,
-    });
+    }, "*");
   },
   privacyToggle: () => { // (사용 X) Privacy 약관 내용 토글 UI
     const toggleBtn = document.querySelector('.privacy-toggle');
@@ -285,7 +285,7 @@ const main  = async () => { try {
   const location = params.get('location');
   const urlParams = {brand, lang, location};
   
-  utils.sendHeightToParent();
+  window.addEventListener('load', () => utils.sendHeightToParent());
   utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
@@ -305,7 +305,7 @@ const main  = async () => { try {
   categorySelect.addEventListener('change', (ev) => {
     form.renderInquiryType(ev.target.value, urlParams);
     form.attachValidation(ev.target.value, urlParams);
-    // setTimeout(() => utils.sendHeightToParent(), 100);
+    setTimeout(() => utils.sendHeightToParent(), 100);
   });
 
   // 제출 버튼 클릭 이벤트
@@ -325,16 +325,6 @@ const main  = async () => { try {
     console.error(err);
     form.setSubmitState('error', stateProps, urlParams);
   }});
-  
-  window.addEventListener('load', function () {
-    console.log('[child] window loaded, sending test postMessage');
-    if (window.parent && window.parent !== window) {
-      window.parent.postMessage(
-        { type: 'INQUIRY_TEST', message: 'hello from child' },
-        '*'
-      );
-    }
-  });
 } catch(err){
   console.error(err);
 }}
