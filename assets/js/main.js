@@ -255,8 +255,8 @@ const form = {
       
       const message = SUBMIT_STATE[state][lang];
       const stateText = result.querySelector('p');
-      // stateText.innerText = message;
-      window.alert(message);
+      stateText.innerText = message;
+      
       if (state === 'success') {
         stateText.classList.add('text-success');
         setTimeout(() => stateText.innerText = '', 8000);
