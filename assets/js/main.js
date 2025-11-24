@@ -305,7 +305,7 @@ const main  = async () => { try {
   categorySelect.addEventListener('change', (ev) => {
     form.renderInquiryType(ev.target.value, urlParams);
     form.attachValidation(ev.target.value, urlParams);
-    setTimeout(utils.sendHeightToParent, 100);
+    setTimeout(() => utils.sendHeightToParent(), 100);
   });
 
   // 제출 버튼 클릭 이벤트
