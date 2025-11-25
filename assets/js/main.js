@@ -28,7 +28,7 @@ const utils = {
   },
   sendHeightToParent: () => {
     const wrapper = document.getElementById('inquiry-form') || document.body;
-    const height = wrapper.scrollHeight;
+    const height = wrapper.scrollHeight + 50;
     
     window.parent.postMessage({
       type: 'INQUIRY_IFRAME_RESIZE',
@@ -167,16 +167,16 @@ const form = {
 
     let isValid = true;
     const value = elem.value.trim();
-
     if (!value) isValid = false;
 
-    if (fieldId === 'email' && value) { // 이메일 형식 체크
-      const emailValid = /\S+@\S+\.\S+/.test(value);
-      if (!emailValid) {
-        isValid = false;
-        emailValidationActive = true;
+    if (fieldId === 'email') { // 이메일 형식 체크
+      if (value) {
+        const emailValid = /\S+@\S+\.\S+/.test(value);
+        if (!emailValid) {
+          isValid = false;
+        } 
       }
-      console.log(emailValid)
+      emailValidationActive = true;
     }
     if (fieldId === 'phone') {
       document.querySelector('.iti').classList.toggle('is-invalid', !isValid);
@@ -218,19 +218,14 @@ const form = {
 
     fieldIds.forEach((fieldId) => {
       const field = document.getElementById(fieldId);
-      
       if (field.type === 'select-one' || field.type === 'checkbox') {
         field.addEventListener('change', () => form.validateField(fieldId))
       }      
-      
       if (field.classList.contains('datepicker-input')) {
         field.addEventListener('changeDate', () => form.validateField(fieldId));  
       }
-
       field.addEventListener('input', () => {
-        if (field.type === 'email') {
-          if (!emailValidationActive) return;
-        }
+        if (field.type === 'email' && !emailValidationActive) return;
         form.validateField(fieldId)
       });
     })
