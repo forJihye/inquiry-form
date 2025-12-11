@@ -30,24 +30,24 @@ export const FORM_VISIBILITY_CONFIG = {
 export const OPTIONS_CONFIG = {
   location: {
     ko: [
-      {label: "본사", value: "head",},
-      {label: "제주", value: "jeju",},
-      {label: "강릉", value: "gangneung",},
-      {label: "여수", value: "yeosu",},
-      {label: "부산", value: "busan",},
-      {label: "라스베가스", value: "lasvegas",},
-      {label: "두바이", value: "dubai",},
-      {label: "뉴욕", value: "newyork",},
+      {label: "본사", value: "dskr"},
+      {label: "제주", value: "amjj"},
+      {label: "강릉", value: "amgn"},
+      {label: "여수", value: "amys"},
+      {label: "부산", value: "ambs"},
+      {label: "라스베가스", value: "amlv"},
+      {label: "두바이", value: "amdb"},
+      {label: "뉴욕", value: "amny"},
     ],
     en: [
-      {label: "head office", value: "head",},
-      {label: "las vegas", value: "lasvegas",},
-      {label: "dubai", value: "dubai",},
-      {label: "new york", value: "newyork",},
-      {label: "jeju", value: "jeju",},
-      {label: "gangneung", value: "gangneung",},
-      {label: "yeosu", value: "yeosu",},
-      {label: "busan", value: "busan",},
+      {label: "head office", value: "dskr"},
+      {label: "las vegas", value: "amlv"},
+      {label: "dubai", value: "amdb"},
+      {label: "new york", value: "amny"},
+      {label: "jeju", value: "amjj"},
+      {label: "gangneung", value: "amgn"},
+      {label: "yeosu", value: "amys"},
+      {label: "busan", value: "ambs"},
     ]
   },
   category: {
@@ -156,6 +156,7 @@ export const FIELD_TEXT_CONFIG = {
   }
 }
 
+// 문의 제출 결과값
 export const SUBMIT_STATE = {
   success : {
     ko: '문의하신 내용이 정상적으로 접수 되었습니다. 담당자를 통해 빠른 시일 내에 회신드리겠습니다.',
@@ -164,5 +165,45 @@ export const SUBMIT_STATE = {
   error: {
     ko: '요청을 처리하는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.',
     en: 'Something went wrong. Please try again later.'
+  }
+}
+
+// privacy-company
+export const PRIVACY_COMPANY_CONFIG = {
+  dskr: {
+    ko: '(주)디스크릭트코리아',
+    en: "d'strict Korea, Inc.",
+  },
+  amjj: {
+    ko: '(주)디스트릭트 제주',
+    en: "d'strict Jeju, Inc.",
+  },
+  amys: {
+    ko: '(주)아르떼뮤지엄코리아 여수',
+    en: "Arte Museum Korea Yeosu, Inc.",
+  },
+  amgn: {
+    ko: '(주)아르떼뮤지엄코리아 강릉',
+    en: "Arte Museum Korea Gangneung, Inc.",
+  },
+  ambs: {
+    ko: '(주)아르떼뮤지엄코리아 부산',
+    en: "Arte Museum Korea Busan, Inc.",
+  },
+  akjj: {
+    ko: '(주)디스트릭트 제주',
+    en: "d'strict Jeju, Inc.",
+  },
+  amdb: {
+    ko: 'ARTE MUSEUM LASER & LIGHTS SHOWS L.L.C',
+    en: 'ARTE MUSEUM LASER & LIGHTS SHOWS L.L.C',
+  },
+  amlv: {
+    ko: 'ARTE MUSEUM LV, LLC.',
+    en: 'ARTE MUSEUM LV, LLC.',
+  },
+  amny: {
+    ko: 'ARTE MUSEUM NY, LLC.',
+    en: 'ARTE MUSEUM NY, LLC.',
   }
 }

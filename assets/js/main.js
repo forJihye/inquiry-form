@@ -3,7 +3,8 @@ import {
   FORM_REQUIRED_FIELD_ID, 
   FORM_VISIBILITY_CONFIG, 
   FIELD_TEXT_CONFIG,
-  SUBMIT_STATE
+  SUBMIT_STATE,
+  PRIVACY_COMPANY_CONFIG
  } from './config.js';
 
 
@@ -80,7 +81,8 @@ const modal = {
 }
 
 let isFormValid = true;
-let emailValidationActive = false;
+let isFileValid = true;
+let isEmailValidation = false;
 
 const form = {
   setSelectOptions: (urlParams) => { // 셀렉트박스 옵션 렌더링 
@@ -176,7 +178,7 @@ const form = {
           isValid = false;
         } 
       }
-      emailValidationActive = true;
+      isEmailValidation = true;
     }
     if (fieldId === 'phone') {
       document.querySelector('.iti').classList.toggle('is-invalid', !isValid);
@@ -225,7 +227,7 @@ const form = {
         field.addEventListener('changeDate', () => form.validateField(fieldId));  
       }
       field.addEventListener('input', () => {
-        if (field.type === 'email' && !emailValidationActive) return;
+        if (field.type === 'email' && !isEmailValidation) return;
         form.validateField(fieldId)
       });
     })
@@ -236,12 +238,11 @@ const form = {
     fileInput.addEventListener('change', (ev) => {
       const file = ev.target.files[0];
       if (file.size > FILE_SIZE_LIMIT) {
-        isFormValid = false;
+        isFileValid = false;
       } else {
-        isFormValid = true;
+        isFileValid = true;
       }
-
-      ev.target.classList.toggle('is-invalid', !isFormValid);
+      ev.target.classList.toggle('is-invalid', !isFileValid);
     })
   },
   setSubmitState: (state, elem, urlParams) => { // 폼 전송 시 제출 버튼 및 결과 상태
@@ -269,6 +270,19 @@ const form = {
         stateText.classList.add('text-danger');
       }
     }
+  },
+  selectLocation: (urlParams) => {
+    const elem = document.getElementById('privacy-company');
+    const location = document.getElementById('location');
+    // console.log(elem, select, urlParams);
+    if (urlParams.location) {
+      elem.innerText = PRIVACY_COMPANY_CONFIG[urlParams.location][urlParams.lang];
+    } else {
+      location.addEventListener('change', (ev) => {
+        const val = ev.target.value;
+        elem.innerText = PRIVACY_COMPANY_CONFIG[val][urlParams.lang];
+      })
+    }
   }
 }
 
@@ -281,7 +295,7 @@ const main  = async () => { try {
   const lang = params.get('lang') ?? defaultLang;
   const location = params.get('location');
   const urlParams = {brand, lang, location};
-
+  
   utils.setIntlTel(lang);
   utils.setDatepicker();
   modal.apply();
@@ -296,6 +310,7 @@ const main  = async () => { try {
   form.renderInquiryType(categorySelect.value || '', urlParams);
   form.attachValidation(categorySelect.value || '', urlParams);
   form.validateFileSize();
+  form.selectLocation(urlParams);
 
   // 문의유형 항목 이벤트
   categorySelect.addEventListener('change', (ev) => {
@@ -308,8 +323,8 @@ const main  = async () => { try {
   submitBtn.addEventListener('click', async (ev) => {try {
     ev.preventDefault();
     form.validateForm(categorySelect.value || '', urlParams);
-
-    if (isFormValid) { 
+    
+    if (isFormValid && isFileValid) { 
       form.setSubmitState('loading', stateProps, urlParams);
       
       // 폼 데이터 전송 로직 추가

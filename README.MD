@@ -25,9 +25,10 @@
 **[주요 항목]**
 - `FORM_REQUIRED_FIELD_ID`: 폼 제출 시 기본적으로 필수 입력해야 하는 필드 ID 목록
 - `FORM_VISIBILITY_CONFIG`: 문의 유형에 따라 어떤 하위 항목을 보여줄지, 숨길지, required 처리 할지 결정하는 설정값
-- `OPTIONS_CONFIG`: 모든 select 드롭다운 옵션 속성을(label, value, visibility) 언러별로 정의해서 브랜드/지점 조건에 따라 특정 옵션이 표시되도록 필터링
+- `OPTIONS_CONFIG`: 모든 select 드롭다운 옵션 속성을(label, value, visibility) 언어별로 정의해서 브랜드/지점 조건에 따라 특정 옵션이 표시되도록 필터링
 - `FIELD_TEXT_CONFIG`: 문의 유형별 placeholder, helpText 등 필드 안내 문구
 - `SUBMIT_STATE`: 문의 폼 데이터 전송 성공/에러 메시지를 언어별로 정리한 설정값
+- `PRIVACY_COMPANY_CONFIG`: 개인정보처리방침 실제 운영 법인명 설정값
 
 #### **`main.js`**  
 문의 폼의 모든 동작을 제어하는 핵심 JavaScript 파일.   
@@ -119,4 +120,4 @@
     * Success: 성공 메시지 + 8초 후 자동 제거
     * Error: 에러 메시지 출력
 
-**폼 데이터 전송 로직은 304번 줄에 추가**
+**폼 데이터 전송 로직은 316번 줄에 추가**
