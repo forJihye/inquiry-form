@@ -175,8 +175,8 @@ export const PRIVACY_COMPANY_CONFIG = {
     en: "d'strict Korea, Inc.",
   },
   amjj: {
-    ko: '(주)디스트릭트 제주',
-    en: "d'strict Jeju, Inc.",
+    ko: '(주) 아르떼뮤지엄코리아 제주',
+    en: "Arte Museum Korea Jeju, Inc.",
   },
   amys: {
     ko: '(주)아르떼뮤지엄코리아 여수',
@@ -191,8 +191,8 @@ export const PRIVACY_COMPANY_CONFIG = {
     en: "Arte Museum Korea Busan, Inc.",
   },
   akjj: {
-    ko: '(주)디스트릭트 제주',
-    en: "d'strict Jeju, Inc.",
+    ko: '(주) 아르떼뮤지엄코리아 키즈 제주',
+    en: "Arte Museum Korea Kids Jeju, Inc.",
   },
   amdb: {
     ko: 'ARTE MUSEUM LASER & LIGHTS SHOWS L.L.C',

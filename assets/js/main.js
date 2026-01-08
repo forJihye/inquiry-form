@@ -259,16 +259,17 @@ const form = {
       btn.disabled = false;
       
       const message = SUBMIT_STATE[state][lang];
-      const stateText = result.querySelector('p');
-      stateText.innerText = message;
+      window.alert(message);
+      // const stateText = result.querySelector('p');
+      // stateText.innerText = message;
       
-      if (state === 'success') {
-        stateText.classList.add('text-success');
-        setTimeout(() => stateText.innerText = '', 8000);
-      }
-      if (state === 'error') {
-        stateText.classList.add('text-danger');
-      }
+      // if (state === 'success') {
+      //   stateText.classList.add('text-success');
+      //   setTimeout(() => stateText.innerText = '', 8000);
+      // }
+      // if (state === 'error') {
+      //   stateText.classList.add('text-danger');
+      // }
     }
   },
   selectLocation: (urlParams) => {
