@@ -40,14 +40,14 @@ export const OPTIONS_CONFIG = {
       {label: "뉴욕", value: "amny"},
     ],
     en: [
-      {label: "head office", value: "dskr"},
-      {label: "las vegas", value: "amlv"},
-      {label: "dubai", value: "amdb"},
-      {label: "new york", value: "amny"},
-      {label: "jeju", value: "amjj"},
-      {label: "gangneung", value: "amgn"},
-      {label: "yeosu", value: "amys"},
-      {label: "busan", value: "ambs"},
+      {label: "Head Office", value: "dskr"},
+      {label: "Las Vegas", value: "amlv"},
+      {label: "Dubai", value: "amdb"},
+      {label: "New York", value: "amny"},
+      {label: "Jeju", value: "amjj"},
+      {label: "Gangneung", value: "amgn"},
+      {label: "Yeosu", value: "amys"},
+      {label: "Busan", value: "ambs"},
     ]
   },
   category: {
