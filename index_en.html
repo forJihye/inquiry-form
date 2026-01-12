@@ -18,15 +18,6 @@
         <div class="col">
           <form action="" id="inquiryForm">
             <div class="row">
-              <div class="col-12 col-md-6" data-field-id="category">
-                <div class="mb-3">
-                  <label for="category" class="form-label">Inquiry Type <span class="required">*</span></label>
-                  <select class="form-select" name="category" id="category" aria-label="" required>
-                    <option value="" selected disabled hidden>Select an inquiry type.</option>
-                  </select>
-                  <div class="invalid-feedback">Please select an inquiry type.</div>
-                </div>
-              </div>
               <div class="col-12 col-md-6" data-field-id="location">
                 <div class="mb-3">
                   <label for="location" class="form-label">Location <span class="required">*</span></label>
@@ -34,6 +25,15 @@
                     <option value="" selected disabled hidden>Select a location.</option>
                   </select>
                   <div class="invalid-feedback">Please select a location.</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" data-field-id="category">
+                <div class="mb-3">
+                  <label for="category" class="form-label">Inquiry Type <span class="required">*</span></label>
+                  <select class="form-select" name="category" id="category" aria-label="" required>
+                    <option value="" selected disabled hidden>Select an inquiry type.</option>
+                  </select>
+                  <div class="invalid-feedback">Please select an inquiry type.</div>
                 </div>
               </div>
               <div class="col-12 col-md-6 field-conditional" data-field-id="businessPurpose">
